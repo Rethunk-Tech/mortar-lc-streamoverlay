@@ -16,6 +16,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <InternalsVisibleTo Include="StreamOverlay.Tests" />
     <ModFile Include="$(TargetPath)" Destination="plugins/" />
   </ItemGroup>
 
