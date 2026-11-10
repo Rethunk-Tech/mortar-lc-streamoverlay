@@ -13,30 +13,14 @@ extension) or Rider (Mono Remote on 127.0.0.1:10000). Debug builds include symbo
 
 ## Tests
 
-Code that doesn't touch Unity can be tested outside the game. Put an xUnit v3 project under `tests/`, for example
-`tests/StreamOverlay.Tests/StreamOverlay.Tests.csproj`:
-
-```xml
-<Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <TargetFramework>net10.0</TargetFramework>
-    <IsPackable>false</IsPackable>
-    <OutputType>Exe</OutputType>
-  </PropertyGroup>
-  <ItemGroup>
-    <ProjectReference Include="../../src/StreamOverlay/StreamOverlay.csproj" />
-    <PackageReference Include="xunit.v3" Version="4.0.2" />
-  </ItemGroup>
-</Project>
-```
-
-Add it to `StreamOverlay.slnx` and run `dotnet test`. CI runs it after the build. The plugin's classes derive from Unity
-types, so tests reach the code through other classes, with `InternalsVisibleTo` on the plugin project for internal ones.
+`tests/StreamOverlay.Tests` (xUnit v3) covers the code that doesn't touch Unity; run `dotnet test`, which CI runs after
+the build. The plugin's classes derive from Unity types, so tests reach the code through other classes, with
+`InternalsVisibleTo` on the plugin project for internal ones.
 
 ## Publishing
 
-Pushing a `vX.Y.Z` tag publishes from CI with the `THUNDERSTORE_API_TOKEN` secret, once the build passes. To publish from your own computer,
-create a service account token for the team on Thunderstore (Settings, Teams, Service Accounts) and store it once.
+Pushing a `vX.Y.Z` tag publishes from CI with the `THUNDERSTORE_API_TOKEN` secret, once the build passes. To publish
+from your own computer, create a service account token for the team on Thunderstore (Settings, Teams, Service Accounts) and store it once.
 Mortar's Develop tab stores it in the same place when you upload from there. The Flatpak build of Mortar does that only
 when it can use your system keyring; otherwise it keeps the token inside its sandbox, where this build can't read it,
 so store it yourself as below.
