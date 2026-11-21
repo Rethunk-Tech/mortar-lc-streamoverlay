@@ -30,3 +30,5 @@ so store it yourself as below.
   `New-StoredCredential -Persist LocalMachine -Target 'thunderstore:Mortar' -Password <token>`.
 
 Then run `dotnet build -c Release -p:PublishTS=true`. Don't add `-bl` or `-v:d` to a publish build: MSBuild logs task inputs, and the token is one.
+
+Decided: the overlay keeps accepting `?token=` and sending `Access-Control-Allow-Origin: *`. OBS browser sources need both and the server is loopback-only; do not re-propose a header token or CORS removal.
